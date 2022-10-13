@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Revisit from './components/Revisit'
 import User from './components/User'
 
 const me = {
@@ -19,21 +20,22 @@ function App() {
    */
   const GITHUB_API = 'https://api.github.com/users'
 
-  useEffect(() => {
-    fetch(GITHUB_API)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log('success==>', data)
-        setUsers(data)
-      })
-      .catch((err) => {
-        console.log('failure==>', err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   fetch(GITHUB_API)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log('success==>', data)
+  //       setUsers(data)
+  //     })
+  //     .catch((err) => {
+  //       console.log('failure==>', err)
+  //     })
+  // }, [])
 
   return (
     <div>
-      <User user={me} key={me.login} />
+      <Revisit />
+      {/* <User user={me} key={me.login} />
 
       <User
         user={{
@@ -54,7 +56,7 @@ function App() {
             key={ind}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }
