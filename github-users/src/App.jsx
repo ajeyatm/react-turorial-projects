@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import Revisit from './components/Revisit'
+import RevisitProps from './components/RevisitProps'
+import RevisitUseEffect from './components/RevisitUseEffect'
 import User from './components/User'
 
 const me = {
@@ -34,7 +35,8 @@ function App() {
 
   return (
     <div>
-      <Revisit />
+      {/* <RevisitUseEffect /> */}
+      <RevisitProps />
       {/* <User user={me} key={me.login} />
 
       <User

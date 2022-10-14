@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const Revisit = () => {
+const RevisitUseEffect = () => {
   const [name, setName] = useState('Ajeya')
   const [age, setAge] = useState(29)
   const [email, setEmail] = useState('')
@@ -56,4 +56,4 @@ const Revisit = () => {
   )
 }
 
-export default Revisit
+export default RevisitUseEffect
