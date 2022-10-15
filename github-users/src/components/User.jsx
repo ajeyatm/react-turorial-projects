@@ -1,9 +1,9 @@
 const User = (props) => {
   return (
-    <div key={props.user.repoLink}>
-      <img src={props.user.avatar} className='avatar' />
-      <a href={props.user.repoLink} target='_blank'>
-        {props.user.userName}
+    <div>
+      <img src={props.avatar} className='avatar' />
+      <a href={props.repoLink} target='_blank'>
+        {props.userName}
       </a>
     </div>
   )
