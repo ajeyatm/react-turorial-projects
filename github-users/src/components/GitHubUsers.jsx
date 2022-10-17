@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import User from './User'
 
 const GITHUB_API = 'https://api.github.com/users'
@@ -12,6 +13,7 @@ const GitHubUsers = () => {
    * i wl use that state variable to display content on the screen/ui
    */
   const [users, setUsers] = useState([])
+  const [searchKey, setSearchKey] = useState(null)
 
   function getGitHubUsers() {
     fetch(GITHUB_API)
@@ -29,6 +31,7 @@ const GitHubUsers = () => {
   async function getUsers() {
     try {
       const res = await fetch(GITHUB_API)
+      console.log('resp from fetch: =', res)
       const data = await res.json()
       setUsers(data)
     } catch (err) {
@@ -46,22 +49,61 @@ const GitHubUsers = () => {
   //       }
   //   }
 
+  const getUsersByAxios = async () => {
+    try {
+      const res = await axios.get(GITHUB_API)
+      console.log('resp from axios: =', res.data)
+      setUsers(res.data)
+    } catch (error) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     // getGitHubUsers()
-    getUsers()
+    // getUsers()
+    getUsersByAxios()
   }, [])
 
   return (
     <div>
       <h2>GitHub Users</h2>
-      {users.map((item, index) => (
-        <User
-          key={index}
-          repoLink={item.html_url}
-          avatar={item.avatar_url}
-          userName={item.login}
+      <div className='searchBarWrapper'>
+        <input
+          type='text'
+          className='searchBar'
+          placeholder='Search By Name'
+          onChange={(e) => {
+            setSearchKey(e.target.value)
+          }}
         />
-      ))}
+        {/* <button
+          onClick={() => {
+            console.log('searchKey---', searchKey)
+          }}
+        >
+          Search
+        </button> */}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+        {users
+          .filter((user, index) => {
+            // if(searchKey=== null || searchKey==='') return true
+            if (!searchKey) return true //if searchKey is empty , then return all users
+
+            // console.log('searchKey==', searchKey)
+            // console.log('item.login==', item.login)
+            return user.login.startsWith(searchKey) //boolean
+          })
+          .map((item, index) => (
+            <User
+              key={index}
+              repoLink={item.html_url}
+              avatar={item.avatar_url}
+              userName={item.login}
+            />
+          ))}
+      </div>
     </div>
   )
 }
