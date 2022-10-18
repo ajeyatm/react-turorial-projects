@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import User from './User'
 
@@ -14,6 +14,8 @@ const GitHubUsers = () => {
    */
   const [users, setUsers] = useState([])
   const [searchKey, setSearchKey] = useState(null)
+
+  const inputRef = useRef()
 
   function getGitHubUsers() {
     fetch(GITHUB_API)
@@ -73,17 +75,27 @@ const GitHubUsers = () => {
           type='text'
           className='searchBar'
           placeholder='Search By Name'
-          onChange={(e) => {
-            setSearchKey(e.target.value)
-          }}
+          // onChange={(e) => {
+          //   setSearchKey(e.target.value)
+          // }}
+          ref={inputRef}
         />
-        {/* <button
+        <button
           onClick={() => {
-            console.log('searchKey---', searchKey)
+            console.log(inputRef)
+            // setSearchKey(inputRef.current.value)
           }}
         >
           Search
-        </button> */}
+        </button>
+        <button
+          onClick={() => {
+            inputRef.current.value = ''
+            setSearchKey(null)
+          }}
+        >
+          Reset
+        </button>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
         {users
