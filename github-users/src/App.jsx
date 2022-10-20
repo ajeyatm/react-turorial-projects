@@ -1,5 +1,6 @@
 import './App.css'
-import GitHubUsers from './components/GitHubUsers'
+import SomeComponent from './components/SomeComponent'
+// import GitHubUsers from './components/GitHubUsers'
 // import RevisitProps from './components/RevisitProps'
 // import RevisitUseEffect from './components/RevisitUseEffect'
 
@@ -8,7 +9,8 @@ function App() {
     <div>
       {/* <RevisitUseEffect /> */}
       {/* <RevisitProps /> */}
-      <GitHubUsers />
+      {/* <GitHubUsers /> */}
+      <SomeComponent />
     </div>
   )
 }
