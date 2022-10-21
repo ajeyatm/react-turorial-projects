@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, memo } from 'react'
 import { useEffect } from 'react'
 
 //refrence
@@ -14,9 +14,22 @@ const SomeComponent = () => {
   //useCallback=> memorises the function
 
   //useMemo=> memorises the value
-  const person2 = useMemo(() => ({ name: 'amit', age: 27 }), [])
+  const person2 = useMemo(() => {
+    //heavy computation
+    //res { name: 'amit', age: 27 }
+    console.log('usememolog')
+    return { name: 'amit', age: 27 }
+  }, [counter])
 
-  //useEffect( ()=>{}, [] )
+  const getName = useCallback(() => {
+    //api call
+    console.log('hi from getname usecallback')
+    //change the value of state varibale
+  }, [])
+
+  useEffect(() => {
+    getName()
+  }, [])
 
   return (
     <div>
@@ -37,8 +50,17 @@ const SomeComponent = () => {
     </div>
   )
 }
+//react components re-renders whenever there is change
+//in its state varibales and props
+
+//unwanted re-rendering due to change in the value of state varibales can be
+//handled by useEffect, (useMemo/useCallback)
+
+//unwanted re-rendering due to change in the value of props can be handled by memo and/or
+//by enclosing useMemo/useCallback around the property value
 
 //memoization
+
 //memo=> memorises the component
 const Person = memo((props) => {
   //memory extesive operation

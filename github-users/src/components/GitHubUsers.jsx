@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
 import User from './User'
 
@@ -51,7 +51,7 @@ const GitHubUsers = () => {
   //       }
   //   }
 
-  const getUsersByAxios = async () => {
+  const getUsersByAxios = useCallback(async () => {
     try {
       const res = await axios.get(GITHUB_API)
       console.log('resp from axios: =', res.data)
@@ -59,7 +59,7 @@ const GitHubUsers = () => {
     } catch (error) {
       console.log(err)
     }
-  }
+  }, [])
 
   useEffect(() => {
     // getGitHubUsers()
