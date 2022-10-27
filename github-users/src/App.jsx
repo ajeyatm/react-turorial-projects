@@ -1,5 +1,6 @@
 import './App.css'
-import Todo from './components/Todo'
+// import Todo from './components/Todo'
+import Todo_V2 from './components/Todo_V2'
 // import SomeComponent from './components/SomeComponent'
 // import GitHubUsers from './components/GitHubUsers'
 // import RevisitProps from './components/RevisitProps'
@@ -12,7 +13,8 @@ function App() {
       {/* <RevisitProps /> */}
       {/* <GitHubUsers /> */}
       {/* <SomeComponent /> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Todo_V2 />
     </div>
   )
 }

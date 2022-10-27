@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react'
 import './Todo.css'
 
+let id = 0
+const generateId = () => id++
+
 const Todo = () => {
   const [todos, setTodos] = useState([])
 
@@ -23,8 +26,10 @@ const Todo = () => {
           className='create'
           onClick={() => {
             const value = titleRef.current.value
+            const _id = generateId()
             if (value?.length) {
-              const todo = { title: value, isDone: false }
+              const todo = { id: _id, title: value, isDone: false }
+              console.log(todo)
               clearTitle()
               setTodos([...todos, todo])
             }
@@ -56,7 +61,7 @@ const Todo = () => {
                   // const { title } = item //=>{title: 'task 3', isDone: false}
                   const itemToBeMadeDone = item
                   const modifiedTodos = todos.map((ele, ind) => {
-                    if (ele.title === itemToBeMadeDone.title)
+                    if (ele.id === itemToBeMadeDone.id)
                       return { ...ele, isDone: !ele.isDone }
                     return ele
                   })
@@ -72,7 +77,7 @@ const Todo = () => {
                   // const { title } = item //=>{title: 'task 3', isDone: false}
                   const itemToBeRemoved = item
                   const filteredTodos = todos.filter((ele, ind) => {
-                    if (ele.title === itemToBeRemoved.title) return false
+                    if (ele.id === itemToBeRemoved.id) return false
                     return true
                   })
 
