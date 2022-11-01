@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
 import User from './User'
+import useFetchUsers from '../hooks/useFetchUsers'
 
 const GITHUB_API = 'https://api.github.com/users'
 
@@ -12,10 +13,15 @@ const GitHubUsers = () => {
    * i wl store it in state variable
    * i wl use that state variable to display content on the screen/ui
    */
-  const [users, setUsers] = useState([])
+  // const [users, setUsers] = useState([])
   const [searchKey, setSearchKey] = useState(null)
 
   const inputRef = useRef()
+
+  //hooks starts with prefix-use
+  //hooks should not be used inside conditionals or loops
+
+  const { data, error, loading } = useFetchUsers(GITHUB_API)
 
   function getGitHubUsers() {
     fetch(GITHUB_API)
@@ -61,11 +67,14 @@ const GitHubUsers = () => {
     }
   }, [])
 
-  useEffect(() => {
-    // getGitHubUsers()
-    // getUsers()
-    getUsersByAxios()
-  }, [])
+  // useEffect(() => {
+  // // getGitHubUsers()
+  // // getUsers()
+  // getUsersByAxios()
+  // }, [])
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Something Went wrong...</div>
 
   return (
     <div>
@@ -82,8 +91,8 @@ const GitHubUsers = () => {
         />
         <button
           onClick={() => {
-            console.log(inputRef)
-            // setSearchKey(inputRef.current.value)
+            // console.log(inputRef)
+            setSearchKey(inputRef.current.value)
           }}
         >
           Search
@@ -98,7 +107,7 @@ const GitHubUsers = () => {
         </button>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-        {users
+        {data
           .filter((user, index) => {
             // if(searchKey=== null || searchKey==='') return true
             if (!searchKey) return true //if searchKey is empty , then return all users
