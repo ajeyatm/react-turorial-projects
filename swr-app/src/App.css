@@ -1,0 +1,33 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.user-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+.user {
+  color: chocolate;
+  font-size: larger;
+  background-color: antiquewhite;
+  padding: 14px;
+  line-height: 30px;
+  border-radius: 4px;
+  -webkit-box-shadow: 8px 1px 0px 5px rgba(224, 163, 117, 1);
+  -moz-box-shadow: 8px 1px 0px 5px rgba(224, 163, 117, 1);
+  box-shadow: 8px 1px 0px 5px rgba(224, 163, 117, 1);
+}
+.email-link {
+  text-decoration: none;
+  color: chocolate;
+}
+
+.user:hover {
+  -webkit-box-shadow: 8px 1px 0px 8px rgba(224, 163, 117, 1);
+  -moz-box-shadow: 8px 1px 0px 8px rgba(224, 163, 117, 1);
+  box-shadow: 8px 1px 0px 8px rgba(224, 163, 117, 1);
+}
